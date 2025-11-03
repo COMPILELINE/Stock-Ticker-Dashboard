@@ -10,7 +10,7 @@ function App() {
     <StockProvider>
       <div className="app-container">
         <header>
-          <h1>React Stock Ticker</h1>
+          <h1>Stock Ticker Dashboard</h1>
           <SearchBar />
         </header>
         <main>
