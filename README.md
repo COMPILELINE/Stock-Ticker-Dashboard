@@ -1,16 +1,54 @@
-# React + Vite
+# 📈 Stock Ticker Dashboard 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Demo Link](https://img.shields.io/badge/Live%20Demo-Vercel-000000?style=for-the-badge&logo=vercel)](https://stock-ticker-dashboard.vercel.app/)
+[![GitHub Repo stars](https://img.shields.io/github/stars/YOUR_GITHUB_USER/YOUR_REPO_NAME?style=for-the-badge&color=yellow)](https://github.com/COMPILELINE/Stock-Ticker-Dashboard)
 
-Currently, two official plugins are available:
+A real-time stock watchlist built with React, Vite, and Alpha Vantage.  
+It rotates API requests to stay within free-tier limits, stores your watchlist locally, and flashes price changes for a live trading feel.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🌟 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Real-time stock price polling (API-safe)
+- Persistent watchlist via `localStorage`
+- Green/Red flash animations for price moves
+- Serverless proxy for secure API key handling
+- Clean architecture with Context API + custom hooks
+- Deployed with Vercel
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠 Tech Stack
+
+| Layer | Tools |
+|---|---|
+| Framework | React + Vite |
+| State | Context API + `useReducer` |
+| Hooks | `useLocalStorage`, `useInterval` |
+| Style | Pure CSS |
+| API | Alpha Vantage |
+| Hosting | Vercel (Serverless Functions) |
+
+---
+
+## 🚀 Installation
+
+### Requirements
+
+- Node.js (LTS)
+- Alpha Vantage API Key: https://www.alphavantage.co/support/#api-key
+- Vercel CLI  
+  ```bash
+  npm install -g vercel
+- Setup
+  ```bash
+  git clone YOUR_REPO_URL
+  cd react-stock-ticker-dashboard
+  npm install
+- Environment Variables
+  Create .env.local in project root:
+  ```bash
+  ALPHA_VANTAGE_API_KEY="YOUR_API_KEY_HERE"
+  VITE_API_URL=/api
+
