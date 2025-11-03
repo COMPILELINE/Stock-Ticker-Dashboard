@@ -18,7 +18,6 @@ function App() {
         </main>
         <footer>
           <p>Data provided by Alpha Vantage. Not for financial advice.</p>
-          {/* RefreshTimer component would go here */}
         </footer>
       </div>
     </StockProvider>
