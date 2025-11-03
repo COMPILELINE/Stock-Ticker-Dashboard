@@ -1,4 +1,3 @@
-// src/components/SearchBar.jsx
 import React, { useState } from 'react';
 import { useStock } from '../contexts/StockContext';
 import { fetchStockQuote } from '../services/api';
@@ -24,13 +23,11 @@ function SearchBar() {
     setError(null);
 
     try {
-      // We "ping" the API first to validate the symbol
       const data = await fetchStockQuote(upperSymbol);
       
-      // If valid, we add to context. The StockList will handle fetching data.
       dispatch({ type: 'ADD_STOCK', payload: upperSymbol });
       dispatch({ type: 'UPDATE_STOCK_DATA', payload: { symbol: upperSymbol, data } });
-      setSymbol(''); // Clear input
+      setSymbol('');
     } catch (err) {
       setError(`Failed to find symbol "${upperSymbol}". Please try again.`);
       console.error(err);

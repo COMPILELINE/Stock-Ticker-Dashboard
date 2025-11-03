@@ -1,4 +1,3 @@
-// src/components/StockCard.jsx
 import React, { useState, useEffect, memo } from 'react';
 import { useStock } from '../contexts/StockContext';
 import {
@@ -13,30 +12,27 @@ function StockCard({ symbol, data }) {
   const [flashClass, setFlashClass] = useState('');
 
   const handleRemove = (e) => {
-    e.stopPropagation(); // Prevent card click
+    e.stopPropagation();
     dispatch({ type: 'REMOVE_STOCK', payload: symbol });
   };
 
-  // --- Price Flash Animation Logic ---
   useEffect(() => {
     if (!data || !data.prevPrice) return;
 
-    // Check if price changed
     if (data.price > data.prevPrice) {
       setFlashClass('price-flash-up');
     } else if (data.price < data.prevPrice) {
       setFlashClass('price-flash-down');
     }
 
-    // Remove the class after the animation finishes
     const timer = setTimeout(() => {
       setFlashClass('');
-    }, 500); // Must match CSS animation duration
+    }, 500);
 
     return () => clearTimeout(timer);
-  }, [data]); // Only run when this stock's data changes
+  }, [data]);
 
-  // Show spinner if this card's data is not yet loaded
+
   if (!data) {
     return (
       <div className="stock-card loading">
@@ -65,5 +61,4 @@ function StockCard({ symbol, data }) {
   );
 }
 
-// Use React.memo to prevent re-rendering cards that haven't updated
 export default memo(StockCard);

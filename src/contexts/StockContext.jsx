@@ -1,21 +1,20 @@
-// src/contexts/StockContext.js
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const StockContext = createContext();
 
 const initialState = {
-  watchlist: [], // Array of symbols: ['AAPL', 'MSFT']
-  stockData: {}, // Map of symbol to data: { AAPL: { price: 150, ... } }
+  watchlist: [],
+  stockData: {},
   error: null,
-  loading: false, // For global actions, like initial load
+  loading: false,
 };
 
 function stockReducer(state, action) {
   switch (action.type) {
     case 'ADD_STOCK':
       if (state.watchlist.includes(action.payload)) {
-        return state; // Avoid duplicates
+        return state;
       }
       return {
         ...state,
@@ -36,7 +35,6 @@ function stockReducer(state, action) {
           ...state.stockData,
           [action.payload.symbol]: {
             ...action.payload.data,
-            // Store previous price for flash animation logic
             prevPrice: state.stockData[action.payload.symbol]?.price,
           },
         },
@@ -51,19 +49,16 @@ function stockReducer(state, action) {
 }
 
 export const StockProvider = ({ children }) => {
-  // Persist the watchlist to localStorage
   const [persistedWatchlist, setPersistedWatchlist] = useLocalStorage(
     'ticker_watchlist',
     []
   );
 
-  // Initialize state with the persisted watchlist
   const [state, dispatch] = useReducer(stockReducer, {
     ...initialState,
     watchlist: persistedWatchlist,
   });
 
-  // Sync reducer state back to localStorage whenever watchlist changes
   useEffect(() => {
     setPersistedWatchlist(state.watchlist);
   }, [state.watchlist, setPersistedWatchlist]);
@@ -75,7 +70,6 @@ export const StockProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use the context
 export const useStock = () => {
   const context = useContext(StockContext);
   if (context === undefined) {
